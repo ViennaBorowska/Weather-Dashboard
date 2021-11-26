@@ -20,3 +20,4 @@ console.log("rightnow");
 //Global variables
 const myAPI = "ae943f70020bf5c485600b4ddddb5e34"
 //const weatherAPI = "https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${part}&appid=ae943f70020bf5c485600b4ddddb5e34"
+

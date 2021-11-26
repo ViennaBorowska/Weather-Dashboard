@@ -13,10 +13,25 @@
             <p class="currentTime" id="currentTime"></p>
     </section>
 
+    <div id="city-text">
+
+    </div>
+
 <main class="container">
     
     <section class="leftCol" id="left">
-        
+        <form>
+            <label for="city-search">Search for a City</label>
+            <div class="form-row">
+                <input id="city-search" class="form-control" name="city" value="Manchester"></input>
+                <button id="search-btn" class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+        <div id="search-error"></div>
+
+        <ul id="previous-cities" class="list-group mt-4"></ul>
+
+        <a id="clear-storage" href="#"></a>
     </section>
 
     <section class="weatherDisplay" id="weatherDisplay">

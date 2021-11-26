@@ -16,10 +16,9 @@ body {
 #weatherHead {
     height: 200px;
     border-bottom: 10px solid black;
-    padding: 50px;
+    padding: 20px;
     text-align: center; 
     font-size: 3em;
-    padding-bottom: 100px;
     background-image: url('./Assets/Images/daytime.gif');
     background-size: 100%;
 }
@@ -43,12 +42,22 @@ body {
 
 .leftCol {
     flex: 0 0 30%;
-    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    background-image: url(/Assets/Images/map.jpg);
+    align-items: center;
+    justify-content: space-evenly;
+    border-right: 5px solid black;
+}
+
+.leftCol label {
+    font-size: 2em;
+    font-weight: bolder;
 }
 
 .weatherDisplay {
     flex: 0 0 70%;
-    background-color: yellow;
+    background-color: whitesmoke;
 }
 
 .night {

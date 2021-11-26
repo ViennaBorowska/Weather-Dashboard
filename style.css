@@ -1,3 +1,4 @@
+/***************************************GLOBAL VARIABLES*/
 * {
     margin: 0;
     padding: 0;
@@ -13,6 +14,8 @@ body {
     background-color: magenta;
 }
 
+/********************************************HEADER*/
+/*HEADER STYLING*/
 #weatherHead {
     height: 200px;
     border-bottom: 10px solid black;
@@ -22,24 +25,32 @@ body {
     background-image: url('./Assets/Images/daytime.gif');
     background-size: 100%;
 }
-
+/*TITLE STYLE*/
 #weatherHead a {
     font-size: 2em;
     color: midnightblue;   
 }
-
+/*DATE & TIME STYLING*/
 #weatherHead p {
     font-size: 0.75em;
     z-index: 999;
 }
 
+/*CHANGE BACKGROUND IF NIGHT*/
+.night {
+    background-image: url('./Assets/Images/nightime.gif');
+}
+
+/********************************************MAIN CONTENT CONTAINER*/
+/*MAIN CONTAINER STYLING*/
 .container {
     display: flex;
-    background-color:mediumaquamarine;
     height: 100%;
     width: 100%;
 }
 
+/**********************************LEFT SEARCH COLUMN*/
+/*BOX STYLING*/
 .leftCol {
     flex: 0 0 30%;
     display: flex;
@@ -49,17 +60,51 @@ body {
     justify-content: space-evenly;
     border-right: 5px solid black;
 }
-
+/*SEARCH TITLE*/
 .leftCol label {
     font-size: 2em;
     font-weight: bolder;
 }
 
+/*SEARCH BUTTON STYLING*/
+#city-search {
+    width: 70%;
+}
+
+
+/************MAIN CONTENT DISPLAY - WEATHER CURRENT & FORECAST*/
 .weatherDisplay {
     flex: 0 0 70%;
     background-color: whitesmoke;
 }
 
-.night {
-    background-image: url('./Assets/Images/nightime.gif');
+/*CURRENT WEATHER STYLING*/
+#weather-current {
+    padding-left: 20px;
+}
+
+/*CLEAR STORAGE STYLING*/
+#clear-storage {
+    color: gray;
+    text-decoration: none;
+    font-size: .75em;
+    margin: .5em 0em 0em .5em;
+}
+
+/*WEATHER CARD STYLING*/
+
+/**************************************************MEDIA QUERIES*/
+@media only screen and (max-width: 992px) {
+    #search-city{
+        width:100%;
+    }
+    #search-button{
+        width:100%;
+    }
+}
+@media only screen and (max-width: 575px) {
+
+    #fiveDayForecastUl{
+        justify-content: center;
+    }
 }

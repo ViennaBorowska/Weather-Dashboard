@@ -13,10 +13,25 @@ body {
     background-color: magenta;
 }
 
-.weatherHead {
-    height: 250px;
-    background-color: maroon;
-    text-align: center;    
+#weatherHead {
+    height: 200px;
+    border-bottom: 10px solid black;
+    padding: 50px;
+    text-align: center; 
+    font-size: 3em;
+    padding-bottom: 100px;
+    background-image: url('./Assets/Images/daytime.gif');
+    background-size: 100%;
+}
+
+#weatherHead a {
+    font-size: 2em;
+    color: midnightblue;   
+}
+
+#weatherHead p {
+    font-size: 0.75em;
+    z-index: 999;
 }
 
 .container {
@@ -34,4 +49,8 @@ body {
 .weatherDisplay {
     flex: 0 0 70%;
     background-color: yellow;
+}
+
+.night {
+    background-image: url('./Assets/Images/nightime.gif');
 }

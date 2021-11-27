@@ -28,58 +28,84 @@ $(document).ready(function () {
     // Searchbar event listener
     $('#search-btn').on("click", function (event) {
         event.preventDefault();
-        var currentCity = $('#city-search').val();
+        var currentCity = $('#city-search').val().trim();
         getWeather(currentCity);
         lastSearched = currentCity;
     });
 
     function getWeather(currentCity) {
-        var latit = "";
-        var longit = "";
+       
     //Get weather data
         $.ajax({
             url: `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${myAPI}&units=imperial`,
             method: "GET"
-        }).then(function (response) {
-            latit = response.coord.lat;
-            longit = response.coord.lon;
+        }).then( (response) => {
+
+            //console.log(response);
+
+            var  latit = response.coord.lat;
+            var longit = response.coord.lon;
+            var city = response.name;
+
+           
+            //console.log(latit, longit);
+
             saveToLocal()
             renderPrevious()
-
-        //Get UV data
-            $.ajax({
-                url: `https://api.openweathermap.org/data/2.5/uvi/forecast?appid=${myAPI}&lat=${latit}&lon=${longit}&cnt=1`,
-                method: 'GET'
-            }).then(function (UVresponse) {
-                renderWeather(response, UVresponse);
-            });
-
-            //Get 5 day data
-            $.ajax({
-                url: `https://api.openweathermap.org/data/2.5/onecall?lat=${latit}&lon=${longit}&appid=${myAPI}&units=imperial&exclude=current,minutely,hourly`,
-                method: 'GET'
-            }).then(renderFive);
-            
-        });    
+            renderWeather(response);
+            getUV(latit, longit);
+            getFive(latit, longit);
+        });
     }
+        //Get UV data
+        function getUV(lat, lon,) {
+            $.ajax({
+                url: `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${myAPI}`,
+                method: 'GET'
+            }).then( (UVresponse) => {
+               console.log(UVresponse);
+            });
+        }
+            //Get 5 day data
+        function getFive (lat, lon) {
+            $.ajax({
+                url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${myAPI}&units=imperial&exclude=current,minutely,hourly`,
+                method: 'GET'
+            }).then( (response) => {
+                renderFive(response);
+            })
+            ;
+            
+        };    
+    
 
-        function renderWeather (response, UVresponse) {
-            $("#weatherCurrent").empty();
-            $("#weatherCurrent").append($("<h2>").text(`${response.name}`));
-            $("h2").append($("<img>").attr("src", `https://openweathermap.org/img/w/${response.weather[0].icon}.png`));
-            $("weatherCurrent").append($("<p>").text(`Temperature: ${response.main.temp} °F`));
-            $("weatherCurrent").append($("<p>").text(`Humidity: ${response.main.humidity}%`));
-            $("weatherCurrent").append($("<p>").text(`Wind Speed: ${response.wind.speed} MPH`));
+        function renderWeather (response) {
 
-            if(UVresponse[0].value < 4) {
-                $("weatherCurrent").append($("<p>").text("UV Index: ").append($("<span class='badge badge-pill badge-success'>").text(UVresponse[0].value)));
-            }
-            else if(UVresponse[0].value >= 4 && UVresponse[0].value <= 7) {
-                $("#weatherCurrent").append($("<p>").text("UV Index: ").append($("<span class='badge badge-pill badge-warning'>").text(UVresponse[0].value)));
-            }
-            else {
-                $("#weatherCurrent").append($("<p>").text("UV Index: ").append($("<span class='badge badge-pill badge-danger'>").text(UVresponse[0].value)));
-            }
+            var currentWeather = $("#weathCurrent");
+            currentWeather.empty();
+            var title = $("<div class='card-title'>").text(`${response.name}`)
+            var img = $("<img>").attr("src", `https://openweathermap.org/img/w/${response.weather[0].icon}.png`)
+            var temp = $("<div class='card-text'>").text(`Temperature: ${response.main.temp} °F`);
+            var humid = $("<div class='card-text'>").text(`Humidity: ${response.main.humidity}%`);
+            var wind = $("<div class='card-text'>").text(`Wind Speed: ${response.wind.speed} MPH`);
+
+            var card = $("<div class='card'>");
+            var cardB = $("<div class='card-body'>");
+
+            card.append(cardB);
+            cardB.append(title, temp, humid, wind);
+            title.append(img);
+            currentWeather.append(card);    
+
+            // if(UVresponse[0].value < 4) {
+            //     $("weatherCurrent").append($("<p>").text("UV Index: ").append($("<span class='badge badge-pill badge-success'>").text(UVresponse[0].value)));
+            // }
+            // else if(UVresponse[0].value >= 4 && UVresponse[0].value <= 7) {
+            //     $("#weatherCurrent").append($("<p>").text("UV Index: ").append($("<span class='badge badge-pill badge-warning'>").text(UVresponse[0].value)));
+            // }
+            // else {
+            //     $("#weatherCurrent").append($("<p>").text("UV Index: ").append($("<span class='badge badge-pill badge-danger'>").text(UVresponse[0].value)));
+            // }
         }
     
         function renderFive (response) {

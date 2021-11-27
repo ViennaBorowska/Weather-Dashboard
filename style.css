@@ -11,12 +11,12 @@ body {
     flex-direction: column;
     height: 100vh;
     width: 100vw;
-    background-color: magenta;
 }
 
 /********************************************HEADER*/
 /*HEADER STYLING*/
 #weatherHead {
+    flex: 1 1 100%;
     height: 280px;
     border-bottom: 10px solid black;
     padding: 20px;
@@ -33,7 +33,6 @@ body {
 /*DATE & TIME STYLING*/
 #weatherHead p {
     font-size: 0.75em;
-    z-index: 999;
 }
 
 /*CHANGE BACKGROUND IF NIGHT*/
@@ -55,7 +54,6 @@ body {
     flex: 1 1 30%;
     display: flex;
     flex-direction: column;
-    background-image: url(/Assets/Images/map.jpg);
     align-items: center;
     justify-content: space-evenly;
     border-right: 5px solid black;
@@ -101,9 +99,7 @@ body {
 #weatherForecast {
     flex-direction: row;
 }
-.forecast-cards {
 
-}
 .card {
     border: 1px solid black;
     flex-direction: row;

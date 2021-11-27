@@ -1,9 +1,7 @@
-// Display date & time in header
-
 //API call and append time to page
 
 function displayTopTime() {
-    var rightNow = moment().format('dddd MMMM DD YYYY [at] hh:mm:ss a');
+    var rightNow = moment().format('dddd MMMM DD YYYY [at] hh:mm a');
     $('#currentTime').text(rightNow);
     //console.log(rightNow);
   }
@@ -130,7 +128,12 @@ $(document).ready(function () {
           if(localStorage.getItem("searchedCities") !== null) {
                 getWeather(localStorage.getItem("searchedCities"));
           }
-        
+
+          $("#clearStorage").on("click", function (event) {
+            event.preventDefault();
+            searchedCities = [];
+          })
+               
     
 });
 

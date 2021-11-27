@@ -17,7 +17,7 @@ body {
 /********************************************HEADER*/
 /*HEADER STYLING*/
 #weatherHead {
-    height: 200px;
+    height: 280px;
     border-bottom: 10px solid black;
     padding: 20px;
     text-align: center; 
@@ -92,6 +92,24 @@ body {
 }
 
 /*WEATHER CARD STYLING*/
+.forecastBox {
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    
+}
+#weatherForecast {
+    flex-direction: row;
+}
+.forecast-cards {
+
+}
+.card {
+    border: 1px solid black;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+}
 
 /**************************************************MEDIA QUERIES*/
 @media only screen and (max-width: 992px) {

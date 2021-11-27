@@ -52,7 +52,7 @@ body {
 /**********************************LEFT SEARCH COLUMN*/
 /*BOX STYLING*/
 .leftCol {
-    flex: 0 0 30%;
+    flex: 1 1 30%;
     display: flex;
     flex-direction: column;
     background-image: url(/Assets/Images/map.jpg);
@@ -74,7 +74,7 @@ body {
 
 /************MAIN CONTENT DISPLAY - WEATHER CURRENT & FORECAST*/
 .weatherDisplay {
-    flex: 0 0 70%;
+    flex: 1 1 70%;
     background-color: whitesmoke;
 }
 
@@ -103,6 +103,10 @@ body {
     }
 }
 @media only screen and (max-width: 575px) {
+
+    .leftCol {
+        width: 100%;
+    }
 
     #fiveDayForecastUl{
         justify-content: center;

@@ -77,8 +77,10 @@ body {
 }
 
 /*CURRENT WEATHER STYLING*/
-#weather-current {
-    padding-left: 20px;
+
+
+#weatheCurrent p {
+    text-align: center;
 }
 
 /*CLEAR STORAGE STYLING*/
@@ -111,7 +113,7 @@ body {
 }
 
 div p {
-    padding: 17px;
+    padding: 20px;
 
 }
 

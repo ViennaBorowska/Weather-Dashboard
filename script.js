@@ -19,14 +19,17 @@ displayTopTime();
 
 
 $(document).ready(function () {
+
 // openweather.org API Key
     const myAPI = "ae943f70020bf5c485600b4ddddb5e34"
+
     // LocalStorage cities array - for LHS
     var searchedCities = [];
+
     // Variable to track last searched cities
     var lastSearched = "";
 
-    // Searchbar event listener
+    // Search button function
     $('#search-btn').on("click", function (event) {
         event.preventDefault();
         var currentCity = $('#city-search').val().trim();
@@ -64,14 +67,15 @@ $(document).ready(function () {
                 url: `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${myAPI}`,
                 method: 'GET'
             }).then( (UVresponse) => {
-               if(UVresponse[0].value < 4) {
-                $("weatherCurrent").append($("<p>").text("UV Index: ").append($("<span class='badge badge-pill badge-success'>").text(UVresponse[0].value)));
+                console.log(UVresponse);
+               if(UVresponse.value < 4) {
+                $("#weatherCurrent").append($("<p>").text("Today's UV Index: ").append($("<span class='badge badge-pill badge-success'>").text(UVresponse.value)));
             }
-            else if(UVresponse[0].value >= 4 && UVresponse[0].value <= 7) {
-                $("#weatherCurrent").append($("<p>").text("UV Index: ").append($("<span class='badge badge-pill badge-warning'>").text(UVresponse[0].value)));
+            else if(UVresponse.value >= 4 && UVresponse.value <= 7) {
+                $("#weatherCurrent").append($("<p>").text("Today's UV Index: ").append($("<span class='badge badge-pill badge-warning'>").text(UVresponse.value)));
             }
             else {
-                $("#weatherCurrent").append($("<p>").text("UV Index: ").append($("<span class='badge badge-pill badge-danger'>").text(UVresponse[0].value)));
+                $("#weatherCurrent").append($("<p>").text("Today's UV Index: ").append($("<span class='badge badge-pill badge-danger'>").text(UVresponse.value)));
             }
             });
         }
@@ -92,6 +96,8 @@ $(document).ready(function () {
 
             var currentWeather = $("#weatherCurrent");
             currentWeather.empty();
+            var date = new Date();
+            var todayDate = $("<div class='card-text'>").text(`${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`)
             var title = $("<div class='card-title'>").text(`${response.name}`)
             var img = $("<img>").attr("src", `https://openweathermap.org/img/w/${response.weather[0].icon}.png`)
             var temp = $("<div class='card-text'>").text(`Temperature: ${response.main.temp} °F`);
@@ -102,7 +108,7 @@ $(document).ready(function () {
             var cardB = $("<div class='card-body'>");
 
             card.append(cardB);
-            cardB.append(title, temp, humid, wind);
+            cardB.append(title, todayDate, temp, humid, wind);
             title.append(img);
             currentWeather.append(card);    
 

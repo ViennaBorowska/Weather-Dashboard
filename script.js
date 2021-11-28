@@ -44,7 +44,7 @@ $(document).ready(function () {
 
             //console.log(response);
 
-            var  latit = response.coord.lat;
+            var latit = response.coord.lat;
             var longit = response.coord.lon;
     
 
@@ -64,7 +64,15 @@ $(document).ready(function () {
                 url: `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${myAPI}`,
                 method: 'GET'
             }).then( (UVresponse) => {
-               console.log(UVresponse);
+               if(UVresponse[0].value < 4) {
+                $("weatherCurrent").append($("<p>").text("UV Index: ").append($("<span class='badge badge-pill badge-success'>").text(UVresponse[0].value)));
+            }
+            else if(UVresponse[0].value >= 4 && UVresponse[0].value <= 7) {
+                $("#weatherCurrent").append($("<p>").text("UV Index: ").append($("<span class='badge badge-pill badge-warning'>").text(UVresponse[0].value)));
+            }
+            else {
+                $("#weatherCurrent").append($("<p>").text("UV Index: ").append($("<span class='badge badge-pill badge-danger'>").text(UVresponse[0].value)));
+            }
             });
         }
             //Get 5 day data
@@ -98,20 +106,14 @@ $(document).ready(function () {
             title.append(img);
             currentWeather.append(card);    
 
-            // if(UVresponse[0].value < 4) {
-            //     $("weatherCurrent").append($("<p>").text("UV Index: ").append($("<span class='badge badge-pill badge-success'>").text(UVresponse[0].value)));
-            // }
-            // else if(UVresponse[0].value >= 4 && UVresponse[0].value <= 7) {
-            //     $("#weatherCurrent").append($("<p>").text("UV Index: ").append($("<span class='badge badge-pill badge-warning'>").text(UVresponse[0].value)));
-            // }
-            // else {
-            //     $("#weatherCurrent").append($("<p>").text("UV Index: ").append($("<span class='badge badge-pill badge-danger'>").text(UVresponse[0].value)));
-            // }
+            
         }
-    
+
+          // Create 5 day forecast cards
         function renderFive (response) {
             $("#weatherForecast").empty();
-        // Dynamically create header and bootstrap 'card-deck' div for the loop to append elements to
+            console.log(response);
+      
         $("#weatherForecast").append($("<h3>").text("5-Day Forecast:"), $("<div class='forecast-cards'>")); 
 
             for (var i = 1; i <= 5; i++) {
@@ -121,20 +123,23 @@ $(document).ready(function () {
                 $(".forecast-cards").append($("<div class='card text-white bg-primary card-body'>").append($("<h5>").text(`${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`), 
                 $("<p>").append($("<img>").attr("src", `https://openweathermap.org/img/w/${response.daily[i].weather[0].icon}.png`)),
                 $("<p>").text(`Temp: ${response.daily[i].temp.day} °F`),
-                $("<p>").text(`Humidity: ${response.daily[i].humidity}%`)));
+                $("<p>").text(`Humidity: ${response.daily[i].humidity}%`),
+                $("<p>").text(`Wind Speed: ${response.daily[i].wind_speed}%`)
+                ));
 
             }
         }
 
+        // Saving searches to local storage
         function saveToLocal() {
-            if (searchedCities.includes($("city-search").val()) === false && $("#city-search").val().trim() != "") {
+            if (searchedCities.includes($("#city-search").val()) === false && $("#city-search").val().trim() != "") {
                 searchedCities.push($('#city-search').val());
                 localStorage.setItem("searchedCities", JSON.stringify(searchedCities));
 
                 localStorage.setItem("lastSearhed", lastSearched);
             }
         }
-
+        // Display previous searches as clickable list
         function renderPrevious() {
             $(".list-group").empty();
             var storedSearches = JSON.parse(localStorage.getItem("searchedCities"));
@@ -161,8 +166,12 @@ $(document).ready(function () {
           var storageClear = document.getElementById("clear-storage");
           storageClear.addEventListener("click", function (event) {
             event.preventDefault();
-            searchedCities = [];
             localStorage.clear();
+            $(".list-group").empty();
+            searchedCities = null;
+            location.reload();
+            //localStorage.setItem("searchedCities", "");
+            //localStorage.setItem("storedSearced", "");
             
           });
         

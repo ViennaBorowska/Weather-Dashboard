@@ -20,19 +20,19 @@ https://openweathermap.org/
 
 ## Users are presented with the current date and time, and a search input with prompt:
 
-<img src="Assets/Screenshots/SS1.jpg">  
+<img src="Assets/Screenshots/SS1.JPG">  
 
 ## When an acceptable search is entered, the current and 5-day forecast is rendered to the right side of the display;
 
-<img src="Assets/Screenshots/SS2.jpg">  
+<img src="Assets/Screenshots/SS2.JPG">  
 
 ## Searches and results are saved below the search bar on the left side to be accessed again;
 
-<img src="Assets/Screenshots/SS3.jpg">  
+<img src="Assets/Screenshots/SS3.JPG">  
 
 ## The 'Clear Results' button clears all localStorage and removes previous search buttons
 
-<img src="Assets/Screenshots/SS4.jpg">  
+<img src="Assets/Screenshots/SS4.JPG">  
 
 
 

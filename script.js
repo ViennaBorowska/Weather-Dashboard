@@ -91,7 +91,7 @@ $(document).ready(function () {
             
         };    
     
-
+        // Create HTML elements & display current day weather data
         function renderWeather (response) {
 
             var currentWeather = $("#weatherCurrent");
@@ -115,7 +115,7 @@ $(document).ready(function () {
             
         }
 
-          // Create 5 day forecast cards
+          // Create & display 5 day forecast cards
         function renderFive (response) {
             $("#weatherForecast").empty();
             console.log(response);
@@ -169,6 +169,7 @@ $(document).ready(function () {
                 getWeather(localStorage.getItem("searchedCities"));
           } 
           
+          // Clear results button to clear local storage and holding variables
           var storageClear = document.getElementById("clear-storage");
           storageClear.addEventListener("click", function (event) {
             event.preventDefault();

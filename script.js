@@ -115,7 +115,9 @@ $(document).ready(function () {
         $("#weatherForecast").append($("<h3>").text("5-Day Forecast:"), $("<div class='forecast-cards'>")); 
 
             for (var i = 1; i <= 5; i++) {
-                var d = new Date(response.daily[i].dt*1000);
+                var d = new Date();
+                console.log(d);
+                d.setDate(d.getDate() + i);
                 $(".forecast-cards").append($("<div class='card text-white bg-primary card-body'>").append($("<h5>").text(`${d.getMonth()}/${d.getDate()}/${d.getFullYear()}`), 
                 $("<p>").append($("<img>").attr("src", `https://openweathermap.org/img/w/${response.daily[i].weather[0].icon}.png`)),
                 $("<p>").text(`Temp: ${response.daily[i].temp.day} °F`),

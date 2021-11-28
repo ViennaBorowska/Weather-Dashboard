@@ -118,7 +118,7 @@ $(document).ready(function () {
                 var d = new Date();
                 console.log(d);
                 d.setDate(d.getDate() + i);
-                $(".forecast-cards").append($("<div class='card text-white bg-primary card-body'>").append($("<h5>").text(`${d.getMonth()}/${d.getDate()}/${d.getFullYear()}`), 
+                $(".forecast-cards").append($("<div class='card text-white bg-primary card-body'>").append($("<h5>").text(`${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`), 
                 $("<p>").append($("<img>").attr("src", `https://openweathermap.org/img/w/${response.daily[i].weather[0].icon}.png`)),
                 $("<p>").text(`Temp: ${response.daily[i].temp.day} °F`),
                 $("<p>").text(`Humidity: ${response.daily[i].humidity}%`)));

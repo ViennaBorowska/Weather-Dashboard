@@ -25,6 +25,7 @@ https://openweathermap.org/
 ## When an acceptable search is entered, the current and 5-day forecast is rendered to the right side of the display;
 
 <img src="Assets/Screenshots/SS2.JPG">  
+<img src="Assets/Screenshots/SS5.JPG">  
 
 ## Searches and results are saved below the search bar on the left side to be accessed again;
 

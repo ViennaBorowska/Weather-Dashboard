@@ -9,10 +9,11 @@ function displayTopTime() {
 setInterval(displayTopTime, 1000);
 displayTopTime();
 
+// //Change background image if nighttime NOT WORKING
 //     var currentHour = moment().format("HH");
 //     var dayNight = document.getElementById("#weatherHead")
-// //Change background image if nightime NOT WORKING
-//     if (currentHour >= "18") {
+
+//     if (currentHour >= "18" && currentHour <= "09") {
 //     dayNight.setAttribute("class", "night");
  //} 
 
@@ -45,7 +46,7 @@ $(document).ready(function () {
 
             var  latit = response.coord.lat;
             var longit = response.coord.lon;
-            var city = response.name;
+    
 
            
             //console.log(latit, longit);
@@ -81,7 +82,7 @@ $(document).ready(function () {
 
         function renderWeather (response) {
 
-            var currentWeather = $("#weathCurrent");
+            var currentWeather = $("#weatherCurrent");
             currentWeather.empty();
             var title = $("<div class='card-title'>").text(`${response.name}`)
             var img = $("<img>").attr("src", `https://openweathermap.org/img/w/${response.weather[0].icon}.png`)
@@ -153,13 +154,16 @@ $(document).ready(function () {
 
           if(localStorage.getItem("searchedCities") !== null) {
                 getWeather(localStorage.getItem("searchedCities"));
-          }
-
-          $("#clearStorage").on("click", function (event) {
+          } 
+          
+          var storageClear = document.getElementById("clear-storage");
+          storageClear.addEventListener("click", function (event) {
             event.preventDefault();
             searchedCities = [];
-          })
-               
+            localStorage.clear();
+            
+          });
+        
     
 });
 
